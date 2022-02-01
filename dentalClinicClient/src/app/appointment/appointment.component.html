@@ -1,0 +1,71 @@
+<br /><br />
+<div class="compontent">
+    
+
+    <h2>Appointment:</h2>
+
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+
+        <h5 *ngIf="success"> Success </h5>
+
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Phone Number</mat-label>
+            <input type="text" formControlName="number" placeholder="Phone Number" matInput>
+            <div *ngIf="submited && appointmentForm.controls.number.errors" class="error">
+                <div *ngIf="appointmentForm.controls.number.errors.required">Your Phone number is required</div>
+            </div>
+            <mat-hint>eg. 0612123123</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+
+        <mat-form-field appearance="legacy">
+            <mat-label>E-Mail</mat-label>
+            <input type="text" formControlName="email" placeholder="E-Mail" matInput>
+            <div *ngIf="submited && appointmentForm.controls.email.errors" class="error">
+                <div *ngIf="appointmentForm.controls.email.errors.required">Your E-Mail is required</div>
+            </div>
+            <mat-hint>eg. test@gmail.com</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Date</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-hint>Choose date</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Time</mat-label>   
+            <input matInput [format]="24" placeholder="Time range from 09:00 to 17:00" formControlName="time"
+                [ngxTimepicker]="range" min="09:00" max="17:00" [ngxTimepicker]="with30Gap" readonly >
+            <ngx-material-timepicker #range #with30Gap [minutesGap]="30"></ngx-material-timepicker>
+            <mat-hint>Choose start time</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Duration</mat-label>   
+            <select matNativeControl required formControlName="duration">
+                <option value="30">30 minutes</option>
+                <option value="60">60 minutes</option>
+               
+              </select>
+            <mat-hint>30 or 60 minutes</mat-hint>
+        </mat-form-field>
+
+        
+
+        <br /><br />
+        <button mat-raised-button color="primary" type="submit">Make my appointment</button>
+        
+
+    </form>
+</div>

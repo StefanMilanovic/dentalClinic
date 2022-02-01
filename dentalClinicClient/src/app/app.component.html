@@ -1,0 +1,16 @@
+<br />
+<div class = "title">
+  <h1><b>Dental Clinic</b></h1>
+</div>
+<hr/><br/>
+
+<button mat-button [matMenuTriggerFor]="menu" class ="menuBtn">Menu</button>
+<mat-menu #menu="matMenu">
+  <a routerLink="/appointment" mat-menu-item>Make an appointment</a> 
+  <a routerLink="/cancel-appointment" mat-menu-item>Cancel an appointment</a> 
+  <a routerLink="/signin" mat-menu-item>Sign in</a>
+</mat-menu>
+
+
+<router-outlet>
+</router-outlet>

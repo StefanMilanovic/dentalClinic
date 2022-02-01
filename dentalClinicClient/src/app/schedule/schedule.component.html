@@ -1,0 +1,113 @@
+<div class="row text-center">
+    <div class="col-md-4">
+      <mat-button-toggle-group  class="btn-group">
+       
+        <mat-button-toggle 
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Previous
+        </mat-button-toggle>
+        <mat-button-toggle
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Today
+        </mat-button-toggle>
+        <mat-button-toggle
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Next
+        </mat-button-toggle>
+      </mat-button-toggle-group >
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+      <mat-button-toggle-group class="btn-group">
+        <mat-button-toggle 
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          Month
+        </mat-button-toggle >
+        <mat-button-toggle 
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          Week
+        </mat-button-toggle >
+        <mat-button-toggle 
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        >
+          Day
+        </mat-button-toggle >
+      </mat-button-toggle-group>
+    </div>
+    <div class="col-md-4"> 
+        <form [formGroup]="cancelAppointmentForm" (ngSubmit)="onSubmit()">
+
+        <h5 *ngIf="success"> Success </h5>
+        <mat-form-field appearance="legacy">
+            <mat-label>Patient Phone Number</mat-label>
+            <input type="text" formControlName="number" placeholder="Phone Number" matInput>
+            <div *ngIf="submited && cancelAppointmentForm.controls.number.errors" class="error">
+                <div *ngIf="cancelAppointmentForm.controls.number.errors.required">Patient phone number is required</div>
+            </div>
+            <mat-hint>eg. 0612123123</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="legacy">
+            <mat-label>Code</mat-label>
+            <input type="text" formControlName="code" placeholder="Dentist Code" matInput>
+            <div *ngIf="submited && cancelAppointmentForm.controls.number.errors" class="error">
+                <div *ngIf="cancelAppointmentForm.controls.number.errors.required">Dentist code is required</div>
+            </div>
+            <mat-hint>eg. 01010101</mat-hint>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Cancel appointment</button>
+        </form>
+    </div>
+  </div>
+  <br />
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+     
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      
+    >
+    </mwl-calendar-day-view>
+  </div>
+  

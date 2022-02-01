@@ -1,0 +1,35 @@
+<br /><br />
+<div class="compontent">
+    <h2>Cancel Appointment:</h2>
+
+    <form [formGroup]="cancelAppointmentForm" (ngSubmit)="onSubmit()">
+
+        <h5 *ngIf="success"> Success </h5>
+
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Phone Number</mat-label>
+            <input type="text" formControlName="number" placeholder="Phone Number" matInput>
+            <div *ngIf="submited && cancelAppointmentForm.controls.number.errors" class="error">
+                <div *ngIf="cancelAppointmentForm.controls.number.errors.required">Your Phone number is required</div>
+            </div>
+            <mat-hint>eg. 0612123123</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+
+        <mat-form-field appearance="legacy">
+            <mat-label>E-Mail</mat-label>
+            <input type="text" formControlName="email" placeholder="E-Mail" matInput>
+            <div *ngIf="submited && cancelAppointmentForm.controls.email.errors" class="error">
+                <div *ngIf="cancelAppointmentForm.controls.email.errors.required">Your E-Mail is required</div>
+            </div>
+            <mat-hint>eg. test@gmail.com</mat-hint>
+        </mat-form-field>
+    
+        <br /><br />
+        <button mat-raised-button color="primary" type="submit">Cancel my appointment</button>
+        
+
+    </form>
+</div>

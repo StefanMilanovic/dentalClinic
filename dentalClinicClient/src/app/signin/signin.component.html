@@ -1,0 +1,26 @@
+<br /><br />
+<div class="compontent">
+    <h2>Sign in:</h2>
+
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+
+        <h5 *ngIf="success"> Success </h5>
+
+
+        <mat-form-field appearance="legacy">
+            <mat-label>Identification number</mat-label>
+            <input type="text" formControlName="number" placeholder="Identification Number" matInput>
+            <div *ngIf="submited && signinForm.controls.number.errors" class="error">
+                <div *ngIf="signinForm.controls.number.errors.required">Your Identification number is required</div>
+            </div>
+            <mat-hint>eg. 01010101</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+
+        
+        <button mat-raised-button color="primary" type="submit">Sign in</button>
+        
+
+    </form>
+</div>
